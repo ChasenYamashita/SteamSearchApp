@@ -1,8 +1,7 @@
 package com.example.android.steamsearchapp.data;
 
-import androidx.room.Entity;
+import java.util.ArrayList;
 
-@Entity(tableName = "steamWishlist")
 public class SteamSearchResults {
-    // Data class for steam results
+    public ArrayList<SteamApp> products;
 }
