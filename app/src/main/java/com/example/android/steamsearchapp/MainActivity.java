@@ -166,8 +166,6 @@ public class MainActivity extends AppCompatActivity
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         this.drawerLayout.closeDrawers();
         switch (item.getItemId()) {
-            case R.id.nav_search:
-                return true;
             case R.id.nav_bookmarked_repos:
                 Intent bookmarkedReposIntent = new Intent(this, BookmarkedRepos.class);
                 startActivity(bookmarkedReposIntent);

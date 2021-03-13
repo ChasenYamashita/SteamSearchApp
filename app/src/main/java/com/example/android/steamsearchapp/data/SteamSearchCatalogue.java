@@ -21,9 +21,11 @@ public class SteamSearchCatalogue {
     private static final String BASE_URL = "https://api.steampowered.com";
 
     private MutableLiveData<List<SteamApp>> searchResults;
+    private MutableLiveData<SteamAppDataContainer> appDetails;
     private MutableLiveData<LoadingStatus> loadingStatus;
 
     private String currentQuery;
+    private String currentAppid;
 
     private SteamService steamService;
 
@@ -52,6 +54,47 @@ public class SteamSearchCatalogue {
     private boolean shouldExecuteSearch(String query) {
         return !TextUtils.equals(query, this.currentQuery)
                 || this.getLoadingStatus().getValue() == LoadingStatus.ERROR;
+    }
+
+    private boolean shouldLoadDetails(String appid){
+        return !TextUtils.equals(appid, this.currentAppid)
+                || this.getLoadingStatus().getValue() == LoadingStatus.ERROR;
+    }
+
+    public void loadAppDetails(String appid){
+        if (this.shouldLoadDetails(appid)) {
+            Log.d(TAG, "running new search for this appid: " + appid);
+            this.currentAppid = appid;
+            this.executeSearch(appid, "json");
+        } else {
+            Log.d(TAG, "using cached search results for this appid: " + appid);
+        }
+    }
+
+    public void executeProductDetails(String appid){
+        Call<SteamAppDetails> results;
+
+        results = this.steamService.getSteamProductDetail(appid);
+
+        this.appDetails.setValue(null);
+        this.loadingStatus.setValue(LoadingStatus.LOADING);
+        results.enqueue(new Callback<SteamAppDetails>() {
+            @Override
+            public void onResponse(Call<SteamAppDetails> call, Response<SteamAppDetails> response) {
+                if (response.code() == 200) {
+                    appDetails.setValue(response.body().data);
+                    loadingStatus.setValue(LoadingStatus.SUCCESS);
+                } else {
+                    loadingStatus.setValue(LoadingStatus.ERROR);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SteamAppDetails> call, Throwable t) {
+                t.printStackTrace();
+                loadingStatus.setValue(LoadingStatus.ERROR);
+            }
+        });
     }
 
     public void loadSearchResults(String query) {

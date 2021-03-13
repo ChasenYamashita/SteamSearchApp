@@ -8,4 +8,7 @@ public interface SteamService {
     @GET("ISteamApps/GetAppList/v0002/")
     Call<SteamSearchResults> getSteamProductCatalogue(@Query("key") String key,
                                                       @Query("format") String format);
+
+    @GET("api/appdetails")
+    Call<SteamAppDetails> getSteamProductDetail(@Query("appid") String appid);
 }
