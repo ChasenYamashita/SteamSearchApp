@@ -1,10 +1,12 @@
 package com.example.android.steamsearchapp.data;
 
+import com.example.android.steamsearchapp.data.details.SteamAppDetailsGenre;
+import com.example.android.steamsearchapp.data.details.SteamAppDetailsScreenshot;
+import com.example.android.steamsearchapp.data.details.SteamAppDetailsVideos;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
 
 // for Data object in json response
 

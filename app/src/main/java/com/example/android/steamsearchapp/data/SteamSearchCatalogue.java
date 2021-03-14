@@ -51,6 +51,8 @@ public class SteamSearchCatalogue {
         return this.loadingStatus;
     }
 
+    public LiveData<SteamAppDataContainer> getSingleAppDetails(){ return this.appDetails; }
+
     private boolean shouldExecuteSearch(String query) {
         return !TextUtils.equals(query, this.currentQuery)
                 || this.getLoadingStatus().getValue() == LoadingStatus.ERROR;

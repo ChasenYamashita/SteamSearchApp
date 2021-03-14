@@ -1,4 +1,4 @@
-package com.example.android.steamsearchapp.data;
+package com.example.android.steamsearchapp.data.details;
 
 import com.google.gson.annotations.SerializedName;
 
