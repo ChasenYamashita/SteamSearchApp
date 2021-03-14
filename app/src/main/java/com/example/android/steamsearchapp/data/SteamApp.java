@@ -8,6 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+// For product catalogue call, list for all apps
+
 @Entity(tableName = "wishlistedApps")
 public class SteamApp implements Serializable{
     @SerializedName("appid")

@@ -3,7 +3,10 @@ package com.example.android.steamsearchapp.data;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
+
+// for Data object in json response
 
 public class SteamAppDataContainer implements Serializable {
 
@@ -37,8 +40,16 @@ public class SteamAppDataContainer implements Serializable {
     @SerializedName("website")
     String websiteUrl;
 
-    //developers array
-    //publishers array
+    ArrayList<String> developers;
 
+    ArrayList<String> publishers;
 
+    @SerializedName("genres")
+    ArrayList<SteamAppDetailsGenre> appGenres;
+
+    @SerializedName("screenshots")
+    ArrayList<SteamAppDetailsScreenshot> screenshotUrls;
+
+    @SerializedName("movies")
+    ArrayList<SteamAppDetailsVideos> videoUrls;
 }
